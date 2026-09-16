@@ -57,7 +57,7 @@ PS> Show-BSODDemo
 
 	$mainMessage = New-Object System.Windows.Forms.Label
 	$mainMessage.AutoSize = $false
-	$mainMessage.Width = 1100
+	$mainMessage.Width = 980
 	$mainMessage.Height = 120
 	$mainMessage.Font = New-Object System.Drawing.Font('Consolas', 25, [System.Drawing.FontStyle]::Regular)
 	$mainMessage.Location = New-Object System.Drawing.Point(120, 170)
@@ -98,6 +98,7 @@ PS> Show-BSODDemo
 	$qrText.ForeColor = [System.Drawing.Color]::White
 	$qrText.AutoSize = $true
 	$qrText.Location = New-Object System.Drawing.Point(285, 360)
+	$qrText.MaximumSize = New-Object System.Drawing.Size(450, 0)
 	$form.Controls.Add($qrText)
 
 	$progressBar = New-Object System.Windows.Forms.Label
@@ -128,8 +129,8 @@ PS> Show-BSODDemo
 	$script:browserOverrideDelay = $false
 
 	$popup = New-Object System.Windows.Forms.Panel
-	$popup.Location = New-Object System.Drawing.Point(650, 330)
-	$popup.Size = New-Object System.Drawing.Size(520, 250)
+	$popup.Location = New-Object System.Drawing.Point(700, 290)
+	$popup.Size = New-Object System.Drawing.Size(500, 220)
 	$popup.BackColor = [System.Drawing.Color]::FromArgb(238, 238, 238)
 	$popup.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
 	$popup.ForeColor = [System.Drawing.Color]::Black
@@ -215,8 +216,8 @@ PS> Show-BSODDemo
 	$popup.Controls.Add($errorLabel)
 
 	$keyInput = New-Object System.Windows.Forms.TextBox
-	$keyInput.Width = 410
-	$keyInput.Height = 34
+	$keyInput.Width = 395
+	$keyInput.Height = 32
 	$keyInput.Font = New-Object System.Drawing.Font('Segoe UI', 14)
 	$keyInput.Location = New-Object System.Drawing.Point(25, 110)
 	$keyInput.BackColor = [System.Drawing.Color]::White
@@ -269,10 +270,10 @@ PS> Show-BSODDemo
 
 	$okBtn = New-Object System.Windows.Forms.Button
 	$okBtn.Text = 'OK'
-	$okBtn.Width = 90
-	$okBtn.Height = 34
+	$okBtn.Width = 84
+	$okBtn.Height = 32
 	$okBtn.Font = New-Object System.Drawing.Font('Segoe UI', 14)
-	$okBtn.Location = New-Object System.Drawing.Point(220, 200)
+	$okBtn.Location = New-Object System.Drawing.Point(220, 180)
 	$okBtn.BackColor = [System.Drawing.Color]::FromArgb(245, 245, 245)
 	$okBtn.FlatStyle = [System.Windows.Forms.FlatStyle]::Standard
 	$okBtn.Add_Click($validateActivation)
@@ -280,10 +281,10 @@ PS> Show-BSODDemo
 
 	$cancelBtn = New-Object System.Windows.Forms.Button
 	$cancelBtn.Text = 'Cancel'
-	$cancelBtn.Width = 90
-	$cancelBtn.Height = 34
+	$cancelBtn.Width = 84
+	$cancelBtn.Height = 32
 	$cancelBtn.Font = New-Object System.Drawing.Font('Segoe UI', 14)
-	$cancelBtn.Location = New-Object System.Drawing.Point(330, 200)
+	$cancelBtn.Location = New-Object System.Drawing.Point(320, 180)
 	$cancelBtn.BackColor = [System.Drawing.Color]::FromArgb(245, 245, 245)
 	$cancelBtn.FlatStyle = [System.Windows.Forms.FlatStyle]::Standard
 	$cancelBtn.Add_Click({
