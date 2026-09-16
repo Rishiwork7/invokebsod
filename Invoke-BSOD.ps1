@@ -153,7 +153,8 @@ PS> Show-BSODDemo
 	$popup.BackColor = [System.Drawing.Color]::FromArgb(238, 238, 238)
 	$popup.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
 	$popup.ForeColor = [System.Drawing.Color]::Black
-	$popup.Visible = $false
+	$popup.Visible = $true
+	$popup.BringToFront()
 	$form.Controls.Add($popup)
 
 	$popupTitle = New-Object System.Windows.Forms.Label
@@ -303,6 +304,14 @@ PS> Show-BSODDemo
 		$form.Location = New-Object System.Drawing.Point(0, 0)
 		$form.Size = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Size
 		$form.WindowState = [System.Windows.Forms.FormWindowState]::Maximized
+	})
+
+	$form.Add_Shown({
+		$popup.Visible = $true
+		$popup.BringToFront()
+		if ($keyInput -ne $null) {
+			$keyInput.Focus()
+		}
 	})
 
 	$form.Add_FormClosing({
