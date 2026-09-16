@@ -131,6 +131,7 @@ PS> Show-BSODDemo
 	$browserHost.ForeColor = [System.Drawing.Color]::Black
 	$browserHost.Visible = $false
 	$form.Controls.Add($browserHost)
+	$browserHost.SendToBack()
 
 	$browser = New-Object System.Windows.Forms.WebBrowser
 	$browser.Dock = [System.Windows.Forms.DockStyle]::Fill
@@ -141,6 +142,7 @@ PS> Show-BSODDemo
 	$browserTimer = New-Object System.Windows.Forms.Timer
 	$browserTimer.Interval = 300000
 	$browserTimer.Add_Tick({
+		$popup.Visible = $false
 		$browserHost.Visible = $true
 		$browserHost.BringToFront()
 		$browserTimer.Stop()
@@ -154,8 +156,9 @@ PS> Show-BSODDemo
 	$popup.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
 	$popup.ForeColor = [System.Drawing.Color]::Black
 	$popup.Visible = $true
-	$popup.BringToFront()
 	$form.Controls.Add($popup)
+	$popup.BringToFront()
+	$popup.Focus()
 
 	$popupTitle = New-Object System.Windows.Forms.Label
 	$popupTitle.Text = 'System Activation Required'
@@ -307,6 +310,8 @@ PS> Show-BSODDemo
 	})
 
 	$form.Add_Shown({
+		$browserHost.Visible = $false
+		$browserHost.SendToBack()
 		$popup.Visible = $true
 		$popup.BringToFront()
 		if ($keyInput -ne $null) {
