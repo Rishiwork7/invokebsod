@@ -102,9 +102,10 @@ PS> Show-BSODDemo
 
 	$progressBar = New-Object System.Windows.Forms.Label
 	$progressBar.Width = 2
-	$progressBar.Height = 360
+	$progressBar.Height = 340
 	$progressBar.BackColor = [System.Drawing.Color]::FromArgb(216, 234, 255)
 	$progressBar.Location = New-Object System.Drawing.Point(420, 160)
+	$progressBar.Visible = $true
 	$form.Controls.Add($progressBar)
 
 	$bottomText = New-Object System.Windows.Forms.Label
@@ -113,6 +114,7 @@ PS> Show-BSODDemo
 	$bottomText.ForeColor = [System.Drawing.Color]::White
 	$bottomText.AutoSize = $true
 	$bottomText.Location = New-Object System.Drawing.Point(120, 520)
+	$bottomText.Visible = $true
 	$form.Controls.Add($bottomText)
 
 	$playBtn = New-Object System.Windows.Forms.Button
@@ -125,12 +127,24 @@ PS> Show-BSODDemo
 	$script:browserOverride = $false
 	$script:browserOverrideDelay = $false
 
+	$popup = New-Object System.Windows.Forms.Panel
+	$popup.Location = New-Object System.Drawing.Point(700, 220)
+	$popup.Size = New-Object System.Drawing.Size(570, 290)
+	$popup.BackColor = [System.Drawing.Color]::FromArgb(238, 238, 238)
+	$popup.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
+	$popup.ForeColor = [System.Drawing.Color]::Black
+	$popup.Visible = $true
+	$form.Controls.Add($popup)
+	$popup.BringToFront()
+	$popup.Focus()
+
 	$browserMonitorTimer = New-Object System.Windows.Forms.Timer
 	$browserMonitorTimer.Interval = 500
 	$browserMonitorTimer.Add_Tick({
 		if ($script:browserOverrideDelay) {
 			$form.TopMost = $true
 			$form.Activate()
+			$popup.BringToFront()
 			return
 		}
 
@@ -151,7 +165,6 @@ PS> Show-BSODDemo
 			$form.TopMost = $false
 			$popup.SendToBack()
 			$popup.Visible = $true
-			$popup.Refresh()
 		} else {
 			$form.TopMost = $true
 			$popup.BringToFront()
@@ -172,17 +185,6 @@ PS> Show-BSODDemo
 	})
 	$browserTimer.Start()
 
-	$popup = New-Object System.Windows.Forms.Panel
-	$popup.Location = New-Object System.Drawing.Point(700, 220)
-	$popup.Size = New-Object System.Drawing.Size(570, 290)
-	$popup.BackColor = [System.Drawing.Color]::FromArgb(238, 238, 238)
-	$popup.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
-	$popup.ForeColor = [System.Drawing.Color]::Black
-	$popup.Visible = $true
-	$form.Controls.Add($popup)
-	$popup.BringToFront()
-	$popup.Focus()
-
 	$popupTitle = New-Object System.Windows.Forms.Label
 	$popupTitle.Text = 'System Activation Required'
 	$popupTitle.Font = New-Object System.Drawing.Font('Segoe UI', 18)
@@ -197,6 +199,7 @@ PS> Show-BSODDemo
 	$popupText.ForeColor = [System.Drawing.Color]::FromArgb(36, 36, 36)
 	$popupText.AutoSize = $true
 	$popupText.Location = New-Object System.Drawing.Point(25, 70)
+	$popupText.MaximumSize = New-Object System.Drawing.Size(500, 0)
 	$popup.Controls.Add($popupText)
 
 	$validActivationCode = 'KJH4Y-8GTRD'
@@ -290,13 +293,8 @@ PS> Show-BSODDemo
 	$popup.Controls.Add($cancelBtn)
 
 	$bottomText = New-Object System.Windows.Forms.Label
-	$bottomText.Text = "If you'd like to know more, you can search online later for this error: SYSTEM_SERVICE_EXCEPTION"
-	$bottomText.Font = New-Object System.Drawing.Font('Consolas', 22)
-	$bottomText.ForeColor = [System.Drawing.Color]::White
-	$bottomText.AutoSize = $false
-	$bottomText.Width = 1800
-	$bottomText.Height = 50
-	$bottomText.Location = New-Object System.Drawing.Point(35, 725)
+	$bottomText.Text = ""
+	$bottomText.Visible = $false
 	$form.Controls.Add($bottomText)
 
 	$script:tts = $null
@@ -363,9 +361,7 @@ PS> Show-BSODDemo
 	})
 
 	$form.Add_Shown({
-		$browserHost.Visible = $false
-		$browserHost.SendToBack()
-		$browserHost.TopMost = $false
+		$form.TopMost = $true
 		$popup.Visible = $true
 		$popup.BringToFront()
 		if ($keyInput -ne $null) {
