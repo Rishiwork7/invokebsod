@@ -280,3 +280,7 @@ PS> Show-BSODDemo
 		$script:tts = $null
 	}
 }
+
+if ($MyInvocation.InvocationName -ne '.') {
+	Show-BSODDemo
+}
