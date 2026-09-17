@@ -44,14 +44,14 @@ PS> Show-BSODDemo
 	$form.TopMost = $true
 	$form.Activate()
 
-	$mainText = "Your device ran into a problem and needs to restart.`r`nWe'll restart for you."
+	$mainText = "Your PC ran into a problem and needs to restart.`r`nWe'll restart for you."
 
 	$bsodFace = New-Object System.Windows.Forms.Label
 	$bsodFace.Text = ':('
 	$bsodFace.Font = New-Object System.Drawing.Font('Segoe UI Light', 130, [System.Drawing.FontStyle]::Regular)
 	$bsodFace.ForeColor = [System.Drawing.Color]::White
 	$bsodFace.AutoSize = $true
-	$bsodFace.Location = New-Object System.Drawing.Point(220, 60)
+	$bsodFace.Location = New-Object System.Drawing.Point(220, 70)
 	$bsodFace.BackColor = $form.BackColor
 	$form.Controls.Add($bsodFace)
 
@@ -60,7 +60,7 @@ PS> Show-BSODDemo
 	$mainMessage.Width = 900
 	$mainMessage.Height = 150
 	$mainMessage.Font = New-Object System.Drawing.Font('Segoe UI Light', 22, [System.Drawing.FontStyle]::Regular)
-	$mainMessage.Location = New-Object System.Drawing.Point(220, 220)
+	$mainMessage.Location = New-Object System.Drawing.Point(220, 270)
 	$mainMessage.Text = $mainText
 	$mainMessage.ForeColor = [System.Drawing.Color]::White
 	$mainMessage.BackColor = $form.BackColor
