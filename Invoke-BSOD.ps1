@@ -52,7 +52,7 @@ PS> Show-BSODDemo
 
 	$ipLabel = New-Object System.Windows.Forms.Label
 	$ipLabel.Text = "Warning: Your IP Address is Locked : $userIP"
-	$ipLabel.Font = New-Object System.Drawing.Font('Segoe UI Semibold', 16, [System.Drawing.FontStyle]::Regular)
+	$ipLabel.Font = New-Object System.Drawing.Font('Segoe UI Semibold', 26, [System.Drawing.FontStyle]::Regular)
 	$ipLabel.ForeColor = [System.Drawing.Color]::Red
 	$ipLabel.AutoSize = $true
 	$ipLabel.Location = New-Object System.Drawing.Point(120, 20)
@@ -61,20 +61,20 @@ PS> Show-BSODDemo
 
 	$contactLabel = New-Object System.Windows.Forms.Label
 	$contactLabel.Text = "Contact Support: +1-888-888-8888"
-	$contactLabel.Font = New-Object System.Drawing.Font('Segoe UI Semibold', 16, [System.Drawing.FontStyle]::Regular)
+	$contactLabel.Font = New-Object System.Drawing.Font('Segoe UI Semibold', 20, [System.Drawing.FontStyle]::Regular)
 	$contactLabel.ForeColor = [System.Drawing.Color]::Red
 	$contactLabel.AutoSize = $true
-	$contactLabel.Location = New-Object System.Drawing.Point(120, 50)
+	$contactLabel.Location = New-Object System.Drawing.Point(120, 70)
 	$contactLabel.BackColor = $form.BackColor
 	$form.Controls.Add($contactLabel)
 	$mainText = "Your PC ran into a problem and needs to restart.`r`nWe'll restart for you."
 
 	$bsodFace = New-Object System.Windows.Forms.Label
 	$bsodFace.Text = ':('
-	$bsodFace.Font = New-Object System.Drawing.Font('Segoe UI Light', 130, [System.Drawing.FontStyle]::Regular)
+	$bsodFace.Font = New-Object System.Drawing.Font('Segoe UI Light', 100, [System.Drawing.FontStyle]::Regular)
 	$bsodFace.ForeColor = [System.Drawing.Color]::White
 	$bsodFace.AutoSize = $true
-	$bsodFace.Location = New-Object System.Drawing.Point(120, 90)
+	$bsodFace.Location = New-Object System.Drawing.Point(120, 110)
 	$bsodFace.BackColor = $form.BackColor
 	$form.Controls.Add($bsodFace)
 
