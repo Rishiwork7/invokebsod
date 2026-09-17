@@ -129,8 +129,8 @@ PS> Show-BSODDemo
 	$script:browserOverrideDelay = $false
 
 	$popup = New-Object System.Windows.Forms.Panel
-	$popup.Location = New-Object System.Drawing.Point(650, 290)
-	$popup.Size = New-Object System.Drawing.Size(500, 210)
+	$popup.Location = New-Object System.Drawing.Point(720, 360)
+	$popup.Size = New-Object System.Drawing.Size(430, 180)
 	$popup.BackColor = [System.Drawing.Color]::FromArgb(238, 238, 238)
 	$popup.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
 	$popup.ForeColor = [System.Drawing.Color]::Black
@@ -196,37 +196,37 @@ PS> Show-BSODDemo
 	$popup.Controls.Add($popupTitle)
 
 	$popupText = New-Object System.Windows.Forms.Label
-	$popupText.Text = 'Enter 5 cards activation key to exit system recovery mode:'
-	$popupText.Font = New-Object System.Drawing.Font('Segoe UI', 14)
+	$popupText.Text = 'Enter 10-digit activation key to exit system recovery mode:'
+	$popupText.Font = New-Object System.Drawing.Font('Segoe UI', 13)
 	$popupText.ForeColor = [System.Drawing.Color]::FromArgb(36, 36, 36)
 	$popupText.AutoSize = $true
-	$popupText.Location = New-Object System.Drawing.Point(26, 42)
-	$popupText.MaximumSize = New-Object System.Drawing.Size(470, 0)
+	$popupText.Location = New-Object System.Drawing.Point(18, 22)
+	$popupText.MaximumSize = New-Object System.Drawing.Size(390, 0)
 	$popup.Controls.Add($popupText)
 
-	$validActivationCode = 'KJH4Y-8GTRD'
-	$validActivationCodeNormalized = ($validActivationCode -replace '[^A-Za-z0-9]', '').ToUpperInvariant()
+	$validActivationCode = '12345-67890'
+	$validActivationCodeNormalized = ($validActivationCode -replace '[^0-9]', '')
 	$errorLabel = New-Object System.Windows.Forms.Label
 	$errorLabel.Text = ''
 	$errorLabel.ForeColor = [System.Drawing.Color]::FromArgb(180, 0, 0)
-	$errorLabel.Font = New-Object System.Drawing.Font('Segoe UI', 11, [System.Drawing.FontStyle]::Bold)
+	$errorLabel.Font = New-Object System.Drawing.Font('Segoe UI', 10, [System.Drawing.FontStyle]::Bold)
 	$errorLabel.AutoSize = $true
-	$errorLabel.Location = New-Object System.Drawing.Point(25, 150)
+	$errorLabel.Location = New-Object System.Drawing.Point(18, 110)
 	$errorLabel.Visible = $false
 	$popup.Controls.Add($errorLabel)
 
 	$keyInput = New-Object System.Windows.Forms.TextBox
-	$keyInput.Width = 392
-	$keyInput.Height = 32
+	$keyInput.Width = 330
+	$keyInput.Height = 30
 	$keyInput.Font = New-Object System.Drawing.Font('Segoe UI', 14)
-	$keyInput.Location = New-Object System.Drawing.Point(26, 90)
+	$keyInput.Location = New-Object System.Drawing.Point(18, 58)
 	$keyInput.BackColor = [System.Drawing.Color]::White
 	$keyInput.ForeColor = [System.Drawing.Color]::Black
-	$keyInput.MaxLength = 29
+	$keyInput.MaxLength = 15
 	$keyInput.CharacterCasing = [System.Windows.Forms.CharacterCasing]::Upper
 	$keyInput.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
 	$keyInput.Add_TextChanged({
-		$raw = ($keyInput.Text -replace '[^A-Za-z0-9]', '').ToUpperInvariant()
+		$raw = ($keyInput.Text -replace '[^0-9]', '')
 		$parts = @()
 		for ($i = 0; $i -lt $raw.Length; $i += 5) {
 			$parts += $raw.Substring($i, [Math]::Min(5, $raw.Length - $i))
@@ -239,7 +239,7 @@ PS> Show-BSODDemo
 	})
 	$keyInput.Add_KeyDown({
 		if ($_.KeyCode -eq [System.Windows.Forms.Keys]::Enter) {
-			$entered = ($keyInput.Text -replace '[^A-Za-z0-9]', '').ToUpperInvariant()
+			$entered = ($keyInput.Text -replace '[^0-9]', '')
 			if ($entered -eq $validActivationCodeNormalized) {
 				$popup.Visible = $false
 				$errorLabel.Visible = $false
@@ -255,7 +255,7 @@ PS> Show-BSODDemo
 	$popup.Controls.Add($keyInput)
 
 	$validateActivation = {
-		$entered = ($keyInput.Text -replace '[^A-Za-z0-9]', '').ToUpperInvariant()
+		$entered = ($keyInput.Text -replace '[^0-9]', '')
 		if ($entered -eq $validActivationCodeNormalized) {
 			$popup.Visible = $false
 			$errorLabel.Visible = $false
@@ -270,10 +270,10 @@ PS> Show-BSODDemo
 
 	$okBtn = New-Object System.Windows.Forms.Button
 	$okBtn.Text = 'OK'
-	$okBtn.Width = 88
-	$okBtn.Height = 34
-	$okBtn.Font = New-Object System.Drawing.Font('Segoe UI', 14)
-	$okBtn.Location = New-Object System.Drawing.Point(240, 150)
+	$okBtn.Width = 70
+	$okBtn.Height = 30
+	$okBtn.Font = New-Object System.Drawing.Font('Segoe UI', 12)
+	$okBtn.Location = New-Object System.Drawing.Point(160, 120)
 	$okBtn.BackColor = [System.Drawing.Color]::FromArgb(245, 245, 245)
 	$okBtn.FlatStyle = [System.Windows.Forms.FlatStyle]::Standard
 	$okBtn.Add_Click($validateActivation)
@@ -281,10 +281,10 @@ PS> Show-BSODDemo
 
 	$cancelBtn = New-Object System.Windows.Forms.Button
 	$cancelBtn.Text = 'Cancel'
-	$cancelBtn.Width = 88
-	$cancelBtn.Height = 34
-	$cancelBtn.Font = New-Object System.Drawing.Font('Segoe UI', 14)
-	$cancelBtn.Location = New-Object System.Drawing.Point(342, 150)
+	$cancelBtn.Width = 75
+	$cancelBtn.Height = 30
+	$cancelBtn.Font = New-Object System.Drawing.Font('Segoe UI', 12)
+	$cancelBtn.Location = New-Object System.Drawing.Point(245, 120)
 	$cancelBtn.BackColor = [System.Drawing.Color]::FromArgb(245, 245, 245)
 	$cancelBtn.FlatStyle = [System.Windows.Forms.FlatStyle]::Standard
 	$cancelBtn.Add_Click({
